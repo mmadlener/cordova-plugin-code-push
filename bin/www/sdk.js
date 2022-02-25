@@ -25,6 +25,8 @@ var Sdk = (function () {
                 };
                 var requester = new HttpRequester(contentType);
                 var customAcquisitionManager = new AcquisitionManager(requester, customConfiguration);
+				// unset url prefix 
+				customAcquisitionManager._publicPrefixUrl = '';
                 callback(null, customAcquisitionManager);
             }
             else if (Sdk.DefaultConfiguration.deploymentKey) {
