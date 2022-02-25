@@ -8,11 +8,13 @@
 
 
 "use strict";
-var DefaultServerUrl = "https://codepush.appcenter.ms/";
 var NativeAppInfo = (function () {
-    function NativeAppInfo() {
+	var DefaultServerUrl = "https://codepush.appcenter.ms/";
+    
+	function NativeAppInfo() {
     }
-    NativeAppInfo.getApplicationBuildTime = function (callback) {
+    
+	NativeAppInfo.getApplicationBuildTime = function (callback) {
         var timestampSuccess = function (timestamp) { callback(null, timestamp); };
         var timestampError = function () { callback(new Error("Could not get application timestamp."), null); };
         cordova.exec(timestampSuccess, timestampError, "CodePush", "getNativeBuildTime", []);
@@ -31,6 +33,10 @@ var NativeAppInfo = (function () {
         var serverSuccess = function (serverURL) { serverCallback(null, serverURL); };
         var serverError = function () { serverCallback(null, DefaultServerUrl); };
         cordova.exec(serverSuccess, serverError, "CodePush", "getServerURL", []);
+    };
+    NativeAppInfo.setServerURL = function (serverURL, serverCallback) {
+        DefaultServerUrl = serverURL;
+		serverCallback(DefaultServerUrl);
     };
     NativeAppInfo.getDeploymentKey = function (deploymentKeyCallback) {
         var deploymentSuccess = function (deploymentKey) { deploymentKeyCallback(null, deploymentKey); };

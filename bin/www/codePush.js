@@ -306,6 +306,9 @@ var CodePush = (function () {
         }
         return CodePush.DefaultUpdateDialogOptions;
     };
+    CodePush.prototype.setServerURL = function (serverURL, serverCallback) {
+        NativeAppInfo.setServerURL(serverURL, serverCallback);
+    };
     return CodePush;
 }());
 var ReportStatus;
