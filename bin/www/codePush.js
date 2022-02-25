@@ -133,6 +133,8 @@ var CodePush = (function () {
                                     localPackage.appVersion = currentBinaryVersion;
                                 }
                                 CodePushUtil.logMessage("Checking for update.");
+								// eliminate prefix - not working with kosa !!
+								acquisitionManager._publicPrefixUrl = "";
                                 acquisitionManager.queryUpdateWithCurrentPackage(localPackage, callback);
                             });
                         }, function (error) {
