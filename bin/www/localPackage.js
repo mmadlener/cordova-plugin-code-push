@@ -246,7 +246,8 @@ var LocalPackage = (function (_super) {
                                 ]);
                             }
                         };
-                        var preInstallSuccess = function () {
+                        var preInstallSuccess = function (message) {
+                            CodePushUtil.logMessage(message);
                             invokeSuccessAndInstall();
                         };
                         var preInstallFailure = function (preInstallError) {
