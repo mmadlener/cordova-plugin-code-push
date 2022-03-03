@@ -445,7 +445,7 @@ public class CodePush extends CordovaPlugin {
             File startPage = this.getStartPageForPackage(startLocation);
             if (startPage != null) {
                 /* start page exists */
-                callbackContext.success("Start Location: " + startLocation);
+                callbackContext.success("Start Location: " + startLocation + " - start page: " + startPage.getPath());
             } else {
                 callbackContext.error("Could not get the package start page. Start Location: " + startLocation);
             }
