@@ -121,7 +121,7 @@ public class CodePush extends CordovaPlugin {
     private void identifyStartPage(final CallbackContext callbackContext) {
         File startPage = new File(this.cordova.getActivity().getFilesDir(), "www/index.html");
         if(startPage.exists()){
-            callbackContext.success(startPage);
+            callbackContext.success(startPage.getPath());
         } else {
             callbackContext.error("start page not found");
         }
