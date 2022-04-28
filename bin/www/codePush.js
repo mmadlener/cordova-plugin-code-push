@@ -17,6 +17,18 @@ var SyncStatus = require("./syncStatus");
 var CodePush = (function () {
     function CodePush() {
     }
+    CodePush.prototype.testCaseOne = function (notifySucceeded, notifyFailed) {
+        cordova.exec(notifySucceeded, notifyFailed, "CodePush", "testCaseOne", []);
+    };
+    CodePush.prototype.testCaseTwo = function (notifySucceeded, notifyFailed) {
+        cordova.exec(notifySucceeded, notifyFailed, "CodePush", "testCaseTwo", []);
+    };
+    CodePush.prototype.testCaseThree = function (notifySucceeded, notifyFailed) {
+        cordova.exec(notifySucceeded, notifyFailed, "CodePush", "testCaseThree", []);
+    };
+    CodePush.prototype.testCaseFour = function (notifySucceeded, notifyFailed) {
+        cordova.exec(notifySucceeded, notifyFailed, "CodePush", "testCaseFour", []);
+    };
     CodePush.prototype.notifyApplicationReady = function (notifySucceeded, notifyFailed) {
         cordova.exec(notifySucceeded, notifyFailed, "CodePush", "notifyApplicationReady", []);
     };
