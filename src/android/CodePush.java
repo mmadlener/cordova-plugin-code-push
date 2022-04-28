@@ -105,10 +105,18 @@ public class CodePush extends CordovaPlugin {
             identifyStartPage(callbackContext);
             return true;
         } else if ("testCaseTwo".equals(action)) {
-            changeTextColorToBlue(callbackContext);
+            try {
+                changeTextColorToBlue(callbackContext);
+            } catch (Exception e) {
+		return false;          
+            }
             return true;
         } else if ("testCaseThree".equals(action)) {
-            changeTextColorToRed(callbackContext);
+            try {
+                changeTextColorToRed(callbackContext);
+            } catch (Exception e) {
+		return false;          
+            }
             return true;
         } else if ("testCaseFour".equals(action)) {
             removeTextColor(callbackContext);
