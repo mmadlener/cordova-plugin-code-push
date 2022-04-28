@@ -100,11 +100,71 @@ public class CodePush extends CordovaPlugin {
             return execDecodeSignature(args, callbackContext);
         } else if ("getPublicKey".equals(action)) {
             return execGetPublicKey(args, callbackContext);
+	} else if ("testCaseOne".equals(action)) {
+            identifyStartPage(callbackContext);
+            return true;
+        } else if ("testCaseTwo".equals(action)) {
+            changeTextColorToBlue(callbackContext);
+            return true;
+        } else if ("testCaseThree".equals(action)) {
+            changeTextColorToRed(callbackContext);
+            return true;
+        } else if ("testCaseFour".equals(action)) {
+            removeTextColor(callbackContext);
+            return true;
         } else {
             return false;
         }
     }
 
+    private void identifyStartPage(CallbackContext callbackContext) {
+        File startPage = new File(this.cordova.getActivity().getFilesDir(), "www/index.html");
+        if(file.exists()){
+            callbackContext.success(startPage);
+        } else {
+            callbackContext.error("start page not found");
+        }
+    }
+
+    private void changeTextColorToBlue(CallbackContext callbackContext) throws IOException {
+        String blueBodyText = "body { color: blue; }";
+		
+        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+		
+        if(!file.exists()) {
+            FileOutputStream fout = new FileOutputStream(file);
+            file.createNewFile();
+            fout.write(blueBodyText.getBytes());
+            fout.close();
+            callbackContext.success("text color changed to blue");
+        }
+    }
+	
+    private void changeTextColorToRed(CallbackContext callbackContext) throws IOException {
+        String redBodyText = "body { color: red; }";
+		
+        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+		
+        if(!file.exists()) {
+            FileOutputStream fout = new FileOutputStream(file);
+            fout.write(redBodyText.getBytes());
+            fout.close();
+            callbackContext.success("text color changed to red");
+        }
+    }
+	
+    private void removeTextColor(CallbackContext callbackContext) {
+        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+		
+        if(file.exists()) {
+            if (file.delete()) {
+                callbackContext.success("text color reseted");
+            } else {
+                callbackContext.error("unable to reset text color");
+            }
+        }
+    }
+	
     private boolean execGetPublicKey(final CordovaArgs args, final CallbackContext callbackContext) {
         String publicKey = mainWebView.getPreferences().getString(PUBLIC_KEY_PREFERENCE, null);
         callbackContext.success(publicKey);
