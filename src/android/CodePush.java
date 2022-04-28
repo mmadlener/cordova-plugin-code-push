@@ -16,6 +16,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONException;
 
+import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
