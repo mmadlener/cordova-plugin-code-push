@@ -127,18 +127,18 @@ public class CodePush extends CordovaPlugin {
     }
 
     private void identifyStartPage(final CallbackContext callbackContext) {
-        File startPage = new File(this.cordova.getActivity().getFilesDir(), "www/index.html");
+        File startPage = new File(this.cordova.getActivity().getFilesDir(), "/www/index.html");
         if(startPage.exists()){
             callbackContext.success(startPage.getPath());
         } else {
-            callbackContext.error("start page not found");
+            callbackContext.error("start page not found: " + startPage.getPath());
         }
     }
 
     private void changeTextColorToBlue(final CallbackContext callbackContext) throws IOException {
         String blueBodyText = "body { color: blue; }";
 		
-        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+        File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
         if(!file.exists()) {
             FileOutputStream fout = new FileOutputStream(file);
@@ -152,7 +152,7 @@ public class CodePush extends CordovaPlugin {
     private void changeTextColorToRed(final CallbackContext callbackContext) throws IOException {
         String redBodyText = "body { color: red; }";
 		
-        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+        File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
         if(!file.exists()) {
             FileOutputStream fout = new FileOutputStream(file);
@@ -163,7 +163,7 @@ public class CodePush extends CordovaPlugin {
     }
 	
     private void removeTextColor(final CallbackContext callbackContext) {
-        File file = new File(this.cordova.getActivity().getFilesDir(), "www/style.css");
+        File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
         if(file.exists()) {
             if (file.delete()) {
