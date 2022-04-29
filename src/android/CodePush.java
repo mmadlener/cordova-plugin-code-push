@@ -132,9 +132,8 @@ public class CodePush extends CordovaPlugin {
 	try {	
             File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
-            if(!file.exists()) {
-                FileOutputStream fout = new FileOutputStream(file);
-                file.createNewFile();
+            if(file.exists() || file.createNewFile()) {
+		FileOutputStream fout = new FileOutputStream(file);
                 fout.write(blueBodyText.getBytes());
                 fout.close();
                 callbackContext.success("text color changed to blue");
@@ -149,7 +148,7 @@ public class CodePush extends CordovaPlugin {
 	try {
             File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
-            if(!file.exists()) {
+            if(file.exists() || file.createNewFile()) {
                 FileOutputStream fout = new FileOutputStream(file);
                 fout.write(redBodyText.getBytes());
                 fout.close();
