@@ -105,18 +105,10 @@ public class CodePush extends CordovaPlugin {
             identifyStartPage(callbackContext);
             return true;
         } else if ("testCaseTwo".equals(action)) {
-            try {
-                changeTextColorToBlue(callbackContext);
-            } catch (Exception e) {
-		return false;          
-            }
+            changeTextColorToBlue(callbackContext);
             return true;
         } else if ("testCaseThree".equals(action)) {
-            try {
-                changeTextColorToRed(callbackContext);
-            } catch (Exception e) {
-		return false;          
-            }
+            changeTextColorToRed(callbackContext);
             return true;
         } else if ("testCaseFour".equals(action)) {
             removeTextColor(callbackContext);
@@ -135,30 +127,36 @@ public class CodePush extends CordovaPlugin {
         }
     }
 
-    private void changeTextColorToBlue(final CallbackContext callbackContext) throws IOException {
+    private void changeTextColorToBlue(final CallbackContext callbackContext) {
         String blueBodyText = "body { color: blue; }";
+	try {	
+            File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
-        File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
-		
-        if(!file.exists()) {
-            FileOutputStream fout = new FileOutputStream(file);
-            file.createNewFile();
-            fout.write(blueBodyText.getBytes());
-            fout.close();
-            callbackContext.success("text color changed to blue");
+            if(!file.exists()) {
+                FileOutputStream fout = new FileOutputStream(file);
+                file.createNewFile();
+                fout.write(blueBodyText.getBytes());
+                fout.close();
+                callbackContext.success("text color changed to blue");
+            }
+        } catch (Exception e) {
+            callbackContext.error("error: " + e.getMessage());       
         }
     }
 	
-    private void changeTextColorToRed(final CallbackContext callbackContext) throws IOException {
+    private void changeTextColorToRed(final CallbackContext callbackContext) {
         String redBodyText = "body { color: red; }";
+	try {
+            File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
 		
-        File file = new File(this.cordova.getActivity().getFilesDir(), "/www/style.css");
-		
-        if(!file.exists()) {
-            FileOutputStream fout = new FileOutputStream(file);
-            fout.write(redBodyText.getBytes());
-            fout.close();
-            callbackContext.success("text color changed to red");
+            if(!file.exists()) {
+                FileOutputStream fout = new FileOutputStream(file);
+                fout.write(redBodyText.getBytes());
+                fout.close();
+                callbackContext.success("text color changed to red");
+            }
+        } catch (Exception e) {
+            callbackContext.error("error: " + e.getMessage());       
         }
     }
 	
